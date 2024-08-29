@@ -131,7 +131,7 @@ namespace SAIOptimization.ViewModels
             SubWindow.Content = new BindableRichTextBox()
             {
                 IsReadOnly = true,
-                Source = new Uri(@"pack://application:,,,/SAIOptimization;component/Resources/About.rtf"),
+                Source = new Uri(@"pack://application:,,,/SAIOptimization.esapi;component/Resources/About.rtf"),
 
             };
 
