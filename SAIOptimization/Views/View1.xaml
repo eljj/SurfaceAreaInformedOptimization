@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="SAIOptimization.Views.View1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SAIOptimization.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="760" d:DesignWidth="840" Background="LightGray">
+
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="280"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0 -->
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" FontFamily="Times New Roman" FontSize="32" FontWeight="Bold" Foreground="DarkBlue"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="33,14,116,10" >
+            <Underline>SAIO Optimization Parameter Generation Tool</Underline>
+        </TextBlock>
+        <Button  Grid.Column="2" Command="{Binding AboutCmd}" FontFamily="Times New Roman" FontSize="18" Foreground="DarkBlue" Height="40" Width="60" Margin="290,0,0,0">About</Button>
+
+        <!--Row 1-->
+        <Label x:Name="MarginParameterLabel" Grid.Column="1" Grid.Row="1" Content="Enter Value for R50%Opt Margin Parameter:&#xD;&#xA;(Default Value of 5 Currently Shown)" VerticalAlignment="Center" Width="390" Height="50"  Background="{x:Null}" BorderBrush="Black" FontFamily="Times New Roman" FontSize="18" VerticalContentAlignment="Center" Padding="5,5,0,5" HorizontalAlignment="Right" FontWeight="Bold" FontStyle="Italic" Margin="0,0,0,0"   />
+        <TextBox Background="Cornsilk"  Grid.Column="2" Grid.Row="1" Text="{Binding Path=MarginParameter,  Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  Height="42" Margin="0,0,8,0" TextWrapping="Wrap"  VerticalAlignment="Center"  BorderBrush="#FF020202" FontFamily="Times New Roman" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold"  />
+
+        <!-- Row 2 -->
+        <Label x:Name="PTVMaxLabel" Grid.Column="1" Grid.Row="2" Content="Enter Value for PTV Max Dose Parameter:&#xA;(Default Value of 1.4Currently Shown)" VerticalAlignment="Center" Width="390" Height="50"  Background="{x:Null}" BorderBrush="Black" FontFamily="Times New Roman" FontSize="18" VerticalContentAlignment="Center" Padding="5,5,0,5" HorizontalAlignment="Right" FontWeight="Bold" FontStyle="Italic" Margin="0,0,10,0" />
+        <TextBox Background="Cornsilk" Grid.Column="2" Grid.Row="2" Text="{Binding Path=DoseMaxForStructure, Mode=TwoWay}" HorizontalAlignment="Left" Height="42" Width="390" VerticalAlignment="Center" BorderBrush="#FF020202" FontFamily="Times New Roman" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" />
+
+        <!-- Row 3 -->
+        <Label x:Name="iShellLabel" Grid.Column="1" Grid.Row="3"  Content="Enter Value for iShell Expansion (cm):&#xA;(Optional - enter zero for no Expansion)" VerticalAlignment="Center" Width="388" Height="70"  BorderBrush="Black" FontFamily="Times New Roman" FontSize="18" VerticalContentAlignment="Center" Padding="5,5,0,5" HorizontalAlignment="Right" FontWeight="Bold" FontStyle="Italic" />
+        <TextBox Background="Cornsilk" Grid.Column="2" Grid.Row="3" Text="{Binding Path=ShellExpansionParameter, Mode=TwoWay}"  Height="42" Margin="0,4" TextWrapping="Wrap"  VerticalAlignment="Center" BorderBrush="#FF020202" FontFamily="Times New Roman" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Width="390"  />
+
+        <!-- Row 4-->
+        <Label x:Name="SelectStructureName" Grid.Column="1" Grid.Row="4" Content="Select PTV Name for Parameter Generation:"  VerticalAlignment="Center" Width="390" Height="42"  BorderBrush="Black" FontFamily="Times New Roman" FontSize="18" VerticalContentAlignment="Center" Padding="5,5,0,5" HorizontalAlignment="Right" FontWeight="Bold" FontStyle="Italic" />
+        <ComboBox Background="Cornsilk" x:Name="structurelistnames"  Grid.Column="2" Grid.Row="3"  ItemsSource="{Binding Path=PTVs, Mode=TwoWay}" DisplayMemberPath="Id" SelectedItem="{Binding Path=SelectedStructure}" HorizontalAlignment="Left"   VerticalAlignment="Top" Width="390" Height="42" FontFamily="TimesNewRoman" FontSize="20"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="Black" Margin="0,48,0,0" Grid.RowSpan="2"/>
+
+        <!-- Row 5 -->
+        <Button x:Name="AddToWorkList" Command="{Binding AddToListCmd}" Grid.Column="2" Grid.Row="5" Foreground="DarkBlue" Background="#7ca0de"  Content="Add Selected PTV To Worklist"  HorizontalAlignment="Left" Height="48" Margin="0,1,0,0"  VerticalAlignment="Top" VerticalContentAlignment="Center" Width="390"  BorderBrush="Black" FontFamily="Times New Roman" FontSize="26" FontWeight="Bold" FontStyle="Italic" />
+
+        <!-- Row 6 -->
+        <Label x:Name="WorklistHeader" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" BorderBrush="Black" FontFamily="Times New Roman" FontSize="20" FontStyle="Italic" FontWeight="Bold" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Content="PTV Optimization Parameter Generation Worklist Entries Listed As&#xA;PTV Name - Margin Parameter - PTV Max Dose Parameter - Shell Expansion Parameter" Margin="0,10,0,14" Width="820" />
+
+        <!-- Row 7 -->
+        <ListBox x:Name="WorklistItems" ItemsSource="{Binding Path=ListBoxItems}"   Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Height="280" Width="780" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Top" FontFamily="Times New Roman" FontSize="18" FontWeight="Bold" Margin="0,70,0,0" Grid.RowSpan="3"/>
+
+        <!-- Row 8 -->
+        <Button x:Name="GenerateParmeters" Command="{Binding GenerateCmd}" Grid.Column="2" Grid.Row="8" Foreground="DarkBlue" Background="#7ca0de"  Content="Generate Optimization Parameters"  HorizontalAlignment="Center" Height="50" Margin="2,19,8,11"  VerticalAlignment="Center" Width="390"  BorderBrush="Black" FontFamily="Times New Roman" FontSize="26" FontWeight="Bold" FontStyle="Italic" />
+        <CheckBox x:Name="HAPlan" IsChecked="{Binding Path=IsHAPlan, Mode=TwoWay}" Grid.Row="8" Grid.Column="1" Margin="10,34,372,27" />
+        <Label Content="    For HyperArc Plans Let HyperArc &#xA;Planning Workflow Set PTV Constraints" Grid.Row="8" Grid.Column="1" Foreground="DarkBlue" Margin="28,11,15,8" BorderBrush="Black" FontFamily="Times New Roman" FontSize="20" FontStyle="Italic" FontWeight="Bold" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="357" Height="61"/>
+    </Grid>
+</UserControl>
