@@ -1,6 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using SAIOptimization.CustonWidgets;
+using SAIOptimization.CustomWidgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
